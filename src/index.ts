@@ -1,7 +1,12 @@
-import { interval } from "rxjs";
-import { map } from "rxjs/operators";
+import { interval, fromEvent } from "rxjs";
+import { map, filter, scan } from "rxjs/operators";
 
-let i$ = interval(2000)
-    .pipe(map((d: any) => d* 10));
+let i$ = fromEvent(document, "keydown")
+        .pipe(filter((evt: any) => evt.keyCode >= 48 && evt.keyCode <= 57 ))
+        .pipe(map((evt: any) => evt.key))
+        .pipe(scan((str, v) => {
+            str = v + str;
+            return str;
+        }, ""));
 
-i$.subscribe((d: number) => console.log(d));
+i$.subscribe((d: string) => console.log(d));
