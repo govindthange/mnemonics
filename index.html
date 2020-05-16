@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World</title>
     <style>
-        body {
-            background: rgb(255, 255, 255);
-        }
-
         div {
             width: 100%;
             height: 200px;
@@ -18,13 +14,30 @@
             align-items: center;
         }
 
+        span {
+            display: flex;
+        }
+
         div img {
-            border-color: green;
             width: 80px;
             height: 80px;
-            padding: 2px;
-            border: 1px solid white;
+            margin: 10px;
             object-fit: none;
+            border-radius: 64px;
+            border: 1px solid gray;
+        }
+
+        .group {
+            border: 1px solid gray;
+        }
+
+        #object {
+            border: none;
+        }
+
+        #condition {
+            object-fit: contain;
+            background-color: white;
         }
     </style>
 </head>
@@ -45,9 +58,12 @@
         <img id="character"></img>
         <img id="site"></img>
         <img id="time"></img>
-        <img id="condition"></img>
-        <img id="color"></img>
-        <img id="object"></img>
+        <span class="group">
+            <span id="color">
+                <img id="condition"></img>
+            </span>
+            <img id="object"></img>
+        </span>
     </div>
 
     <script src="/bundle.js"></script>
