@@ -29,6 +29,18 @@
 
         .group {
             border: 1px solid gray;
+            margin: 5px;
+        }
+
+        .danger {
+            width: 70px;
+            height: 70px;
+            margin: 10px;
+            padding-top: 15px;
+            background-color: #fcae1e;
+            border-radius: 0;
+            border: 1px solid white;
+            clip-path: polygon(0% 87%, 50% 0%, 50% 0%, 100% 87%);
         }
 
         #object {
@@ -38,6 +50,7 @@
         #condition {
             object-fit: contain;
             background-color: white;
+            border: 0px solid white;
         }
     </style>
 </head>
@@ -56,8 +69,11 @@
         <img id="injury"></img>
         <img id="role"></img>
         <img id="character"></img>
-        <img id="site"></img>
-        <img id="time"></img>
+        <span class="group">
+            <img class="danger" id="calamity"></img>
+            <img id="site"></img>
+            <img id="time"></img>
+        </span>
         <span class="group">
             <span id="color">
                 <img id="condition"></img>
