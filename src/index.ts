@@ -8,7 +8,11 @@ const conditionImages: string[] = ["0-smoked.jpg", "1-tarred.jpg", "2-nano-sized
 // https://www.spycolor.com/color-index,g
 const colorCodes: string[] = ["#c0c0c0", "#00f5ff", "#000080", "maroon", "red", "#ccff00", "#36454f", "#d4af37", "white", "black"];
 
+const timeColorCodes: string[] = ["black", "#191D30", "#93ABB5", "#87ceeb", "#d7e8fd", "#D4FFF7", "#FEFFD4", "#d7e8fd", "#455270", "#2C3342"];
+const timeImages: string[] = ["0-12am-midnight.png", "1-3am-latenight.png", "2-6am-dawn.png", "3-8am-morning.png", "4-10am-sunny-morning.png", "5-12pm-noon.png", "6-3pm-noon.png", "7-6pm-evening.png", "8-8pm-late-evening.png", "9-10pm-moonlight-dinner.png"];
+
 const calamityImages: string[] = ["0-tsunami.png", "1-draught.png", "2-nuclear-war.png", "3-mob-lynching.png", "4-earthquake.png", "5-landslide.png", "6-jungle-fire.png", "7-comet.png", "8-volcano.png", "9-bomb.png"];
+
 
 /*
 * 1. Setup the PROP to map 4 digits
@@ -93,6 +97,12 @@ let renderScene = (scene: any) => {
     if (condition) {
         condition.src = "./images/object-conditions/" + conditionImages[scene.prop.condition];
     }
+
+    let themeContainer: any = document.getElementById("themeContainer");
+    if (themeContainer) themeContainer.style.backgroundColor = timeColorCodes[scene.theme.time];
+
+    let time: any = document.getElementById("time");
+    if (time) time.src = "./images/time/" + timeImages[scene.theme.time];
 
     let calamity: any = document.getElementById("calamity");
     if (calamity) calamity.src = "./images/calamities/" + calamityImages[scene.theme.calamity];
