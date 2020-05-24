@@ -22,9 +22,9 @@
         }
 
         .label-group {
-            margin-top: 20px;
+            margin: 20px;
             height: 10px;
-            display: flex;
+            display: grid;
             justify-content: center;
             align-items: center;
         }
@@ -35,11 +35,19 @@
         }
 
         .keyword {
-            color: blue;
+            color: black;
             margin-left: 3px;
             margin-right: 3px;
             text-transform: lowercase;
             font-weight: bold;
+        }
+
+        .keyword-tag {
+            top: 20px;
+            color: blue;
+            font-style: italic;
+            font-size: xx-small;
+            margin-left: 1px;
         }
 
         span {
@@ -95,11 +103,13 @@
     </form>
     <div class="label-group">
         <div class="label" id="label"></div>
+        <br />
         <div class="label" id="reverseLabel"></div>
     </div>
 
     <div class="badge">
         <img id="planet"></img>
+        <img class="danger" id="calamity"></img>
         <img id="loci"></img>
         <img id="station"></img>
         <img id="organ"></img>
@@ -107,7 +117,6 @@
         <img id="role"></img>
         <img id="character"></img>
         <span id="siteContainer" class="group">
-            <img class="danger" id="calamity"></img>
             <img id="location"></img>
             <img id="time"></img>
         </span>
