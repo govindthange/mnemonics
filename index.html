@@ -45,7 +45,6 @@
         .keyword-tag {
             top: 20px;
             color: blue;
-            font-style: italic;
             font-size: xx-small;
             margin-left: 1px;
         }
@@ -83,16 +82,79 @@
             border: none;
         }
 
-        #time {
-            border: none;
-            margin: 0;
-            object-position: 40px 15%;
-        }
-
         #condition {
             object-fit: scale-down;
             background-color: white;
             border: 0px solid white;
+        }
+
+        #siteContainer {
+            position: relative;
+            justify-content: baseline;
+            width: 200px;
+            height: 100px;
+        }
+
+        #time {
+            position: absolute;
+            margin: 0;
+            object-position: 10px 15%;
+            left: 0px;
+            border: none;
+        }
+
+        #clock {
+            position: absolute;
+            margin: 0;
+            margin-top: 2px;
+            width: 40px;
+            height: 20px;
+            object-position: 10px 15%;
+            right: 0px;
+            border: none;
+            font-size: xx-small;
+            color: white;
+            mix-blend-mode: difference;
+        }
+
+        #location {
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 60%;
+            border-radius: 0px;
+            border: none;
+            object-fit: fill;
+        }
+
+        #ground {
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 6%;
+            object-fit: fill;
+            border-color: green;
+            border-radius: 0px;
+            border: none;
+            color: white;
+            mix-blend-mode: difference;
+        }
+
+        #weather {
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            border-radius: 0px;
+            border: none;
+            object-fit: scale-down;
         }
     </style>
 </head>
@@ -102,9 +164,9 @@
         <input id="numberInput" type="number" maxlength="8" autocomplete="off" />
     </form>
     <div class="label-group">
-        <div class="label" id="label"></div>
-        <br />
         <div class="label" id="reverseLabel"></div>
+        <br />
+        <div class="label" id="label"></div>
     </div>
 
     <div class="badge">
@@ -117,8 +179,11 @@
         <img id="role"></img>
         <img id="character"></img>
         <span id="siteContainer" class="group">
+            <!-- <img id="ground"></img> -->
             <img id="location"></img>
             <img id="time"></img>
+            <span id="clock"></span>
+            <img id="weather"></img>
         </span>
         <span class="group">
             <span id="color">

@@ -12,12 +12,14 @@ const conditionLabels: string[] = [", with a SCRATCHED surface revealing its ins
 const colorCodes: string[] = ["#f0f0f1", "#00f5ff", "#000080", "magenta", "red", "#ccff00", "#4f0013", "#ffd700", "white", "black"];
 const colorLabels: string[] = ["SILVER color, somewhere ", "TURQUOISE color, somewhere ", "NAVY-BLUE color, somewhere ", "MAROON color, somewhere ", "RED color, somewhere ", "LEMON color, somewhere ", "CHOCOLATY color, somewhere ", "GOLD color, somewhere ", "WHITE color, somewhere ", "BLACK color, somewhere "];
 
-const locationImages: string[] = ["0-city.png", "1-desert.png", "2-north-pole.png", "3-mountain.png", "4-river.png", "5-lake.png", "6-jungle.png", "7-coast.png", "8-valley.png", "9-party.png"];
+const locationImages: string[] = ["0-city.png", "1-desert.png", "2-north-pole.png", "3-mountain2.png", "4-river.png", "5-lake.png", "6-jungle.png", "7-coast.png", "8-valley.png", "9-party.png"];
 const locationLabels: string[] = ["within CITY", "within a DESERT", "at the NORTH POLE", "within MOUNTAINS", "along side the RIVER", "by the LAKE", "in the JUNGLE", "at the COAST", "in the VALLEY", "at the PARTY DESTINATION"];
+const weatherImages: string[] = ["0-snowfall2.png", "1-dust.png", "2-normal2.png", "3-moist.png", "4-rain.png", "5-lightning.png", "6-chilling-air.png", "7-cloud .png", "8-fog.png", "9-pollution.png"];
 const weatherLabels: string[] = [" while SNOWFALL"," in DUSTY weather"," in NORMAL weather"," in MOIST and humid weather"," under RAIN"," in heavy thunder LIGTNING"," in CHILLING weather"," under CLEAR SKY"," in FOGGY weather conditions"," POLLUTED by heavy traffic"];
 const timeColorCodes: string[] = ["black", "#191D30", "#93ABB5", "#87ceeb", "#d7e8fd", "#D4FFF7", "#FEFFD4", "#d7e8fd", "#455270", "#2C3342"];
 const timeImages: string[] = ["0-12am-midnight.png", "1-3am-latenight.png", "2-6am-dawn.png", "3-8am-morning.png", "4-10am-sunny-morning.png", "5-12pm-noon.png", "6-3pm-noon.png", "7-6pm-evening.png", "8-8pm-late-evening.png", "9-10pm-moonlight-dinner.png"];
-const timeLabels: string[] = [" during MIDNIGHT"," during LATE NIGHT @ 3am"," at the DAWN around 6am"," during MORNING around 8am"," in the bright DAY LIGHT around 10am"," at NOON"," at AFTERNOON around 3pm"," during EVENING around 6pm"," during LATE EVENING around 8pm"," during NIGHT @ 10am"];
+const timeLabels: string[] = [" during MIDNIGHT"," during LATE NIGHT @ 3am"," at the DAWN around 6am"," during MORNING around 8am"," in the bright DAY LIGHT around 10am"," at NOON"," at AFTERNOON around 3pm"," during EVENING around 6pm"," during LATE EVENING around 8pm"," during NIGHT @ 10pm"];
+const clockLabels: string[] = ["12:00 AM","3:40 AM","06:00 AM","08:00 AM","10:00 AM","12:00 PM","03:00 PM","06:00 PM","08:00 PM","10:00 PM"];
 const soundLabels: string[] = [" in a total SILENCE.", " with a dull THUD sound.", " with the sound of people approaching closer.", " while listening to someone MOANING IN PAIN.", " while listening to heavy RAIN DROPS.", " [no sound text] ", " while listening to hushing SHH... sound of the wind.", " when a GONG was heard.", " while listening to a VIOLIN.", " while listening to a PIANO."];
 
 const calamityImages: string[] = ["0-tsunami.png", "1-draught.png", "2-nuclear-war.png", "3-mob-lynching.png", "4-earthquake.png", "5-landslide.png", "6-jungle-fire.png", "7-comet.png", "8-volcano.png", "9-bomb.png"];
@@ -120,11 +122,14 @@ let numberToScene = (n: number) => {
             },
             weather: {
                 n: siteWeatherIdx,
-                label: weatherLabels[siteWeatherIdx]
+                label: weatherLabels[siteWeatherIdx],
+                image: weatherImages[siteWeatherIdx],
+                imagePath: "./images/weather/" + weatherImages[siteWeatherIdx]
             },
             time: {
                 n: siteTimeIdx,
                 label: timeLabels[siteTimeIdx],
+                clock: clockLabels[siteTimeIdx],
                 image: timeImages[siteTimeIdx],
                 imagePath: "./images/time/" + timeImages[siteTimeIdx],
                 color: timeColorCodes[siteTimeIdx]
@@ -208,8 +213,14 @@ let renderScene = (scene: any) => {
     let location: any = document.getElementById("location");
     if (location) location.src = scene.site.location.imagePath;
 
+    let weather: any = document.getElementById("weather");
+    if (weather) weather.src = scene.site.weather.imagePath;
+
     let time: any = document.getElementById("time");
     if (time) time.src = scene.site.time.imagePath;
+
+    let clock: any = document.getElementById("clock");
+    if (clock) clock.innerHTML = scene.site.time.clock;
 
     let calamity: any = document.getElementById("calamity");
     if (calamity) calamity.src = scene.calamity.imagePath;
@@ -224,7 +235,6 @@ input$.subscribe({
         console.log(`Memory mapping ${n}!`)
         let scene = numberToScene(n);
         renderLabels(scene, "label");
-        renderScene(scene);
         
         let arr = n.toString().split('').reverse();
         if (arr.length >= 2) {
@@ -236,7 +246,7 @@ input$.subscribe({
         let reverseN = parseInt(arr.join(''));
         let reverseScene = numberToScene(reverseN);
         renderLabels(reverseScene, "reverseLabel");
-        
+        renderScene(reverseScene);
     },
     error: err => console.log(`Oops... ${err}`),
     complete: () => console.log(`Complete!`),
