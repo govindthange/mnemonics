@@ -88,14 +88,20 @@
             border: 0px solid white;
         }
 
-        #siteContainer {
+        .site {
             position: relative;
             justify-content: baseline;
             width: 200px;
             height: 100px;
         }
 
-        #time {
+        #siteReal {
+            margin-top: 20px;
+            width: 600px;
+            height: 300px;
+        }
+
+        .time {
             position: absolute;
             margin: 0;
             object-position: 10px 15%;
@@ -103,7 +109,7 @@
             border: none;
         }
 
-        #clock {
+        .clock {
             position: absolute;
             margin: 0;
             margin-top: 2px;
@@ -117,7 +123,12 @@
             mix-blend-mode: difference;
         }
 
-        #location {
+        #clockReal {
+            width: 80px;
+            font-size: medium;
+        }
+
+        .location {
             position: absolute;
             padding: 0px;
             margin: 0px;
@@ -129,7 +140,12 @@
             object-fit: fill;
         }
 
-        #ground {
+        #locationReal {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ground {
             position: absolute;
             padding: 0px;
             margin: 0px;
@@ -144,7 +160,7 @@
             mix-blend-mode: difference;
         }
 
-        #weather {
+        .weather {
             position: absolute;
             padding: 0px;
             margin: 0px;
@@ -168,8 +184,7 @@
         <br />
         <div class="label" id="label"></div>
     </div>
-
-    <div class="badge">
+    <div>
         <img id="planet"></img>
         <img class="danger" id="calamity"></img>
         <img id="loci"></img>
@@ -178,12 +193,12 @@
         <img id="injury"></img>
         <img id="role"></img>
         <img id="character"></img>
-        <span id="siteContainer" class="group">
-            <!-- <img id="ground"></img> -->
-            <img id="location"></img>
-            <img id="time"></img>
-            <span id="clock"></span>
-            <img id="weather"></img>
+        <span class="group site" id="site">
+            <!-- <img class="ground" id="ground"></img> -->
+            <img class="location" id="location"></img>
+            <img class="time" id="time"></img>
+            <span class="clock" id="clock"></span>
+            <img class="weather" id="weather"></img>
         </span>
         <span class="group">
             <span id="color">
@@ -192,7 +207,14 @@
             <img id="object"></img>
         </span>
     </div>
-
+    <div>
+        <span class="group site" id="siteReal">
+            <img class="location" id="locationReal"></img>
+            <img class="time" id="timeReal"></img>
+            <span class="clock" id="clockReal"></span>
+            <img class="weather" id="weatherReal"></img>
+        </span>
+    </div>
     <script src="/bundle.js"></script>
 </body>
 
