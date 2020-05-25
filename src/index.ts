@@ -24,6 +24,7 @@ const soundLabels: string[] = [" in a total SILENCE.", " with a dull THUD sound.
 
 const calamityImages: string[] = ["0-tsunami.png", "1-draught.png", "2-nuclear-war.png", "3-mob-lynching.png", "4-earthquake.png", "5-landslide.png", "6-jungle-fire.png", "7-comet.png", "8-volcano.png", "9-bomb.png"];
 
+const planetImages: string[] = ["0-sun.png", "1-mercury.png", "2-venus.png", "3-earth.png", "4-mars.png", "5-jupiter.png", "6-saturn.png", "7-neptune.png", "8-uranus.png", "9-pluto.png"];
 /*
 * 1. Setup the PROP to map 4 digits
 */
@@ -173,12 +174,17 @@ let numberToScene = (n: number) => {
             imagePath: "./images/calamities/"
         },
         planet: {
-            
+            n: planetIdx,
+            image: planetImages[planetIdx],
+            imagePath: "./images/planets/"
         }
     };
 }
 
 let tagText = (obj: any) => {
+
+    if (!obj.label) return " [ No label defined ] ";
+
     let text: string = obj.label.replace(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g, ` <span class="keyword">$&<span class="keyword-tag">${obj.n}</span></span> `);
     return text;
 }
@@ -235,6 +241,9 @@ let renderScene = (scene: any) => {
 
     let calamity: any = document.getElementById("calamity");
     if (calamity) calamity.src = scene.calamity.imagePath + scene.calamity.image;
+
+    let planet: any = document.getElementById("planet");
+    if (planet) planet.src = scene.planet.imagePath + scene.planet.image;
 }
 
 let processNumber = (n: any) => {
