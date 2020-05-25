@@ -234,7 +234,7 @@ let renderScene = (scene: any) => {
     renderSite(scene, "Real", "real/");
 
     let calamity: any = document.getElementById("calamity");
-    if (calamity) calamity.src = scene.calamity.imagePath;
+    if (calamity) calamity.src = scene.calamity.imagePath + scene.calamity.image;
 }
 
 let processNumber = (n: any) => {
