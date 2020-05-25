@@ -237,27 +237,49 @@ let renderScene = (scene: any) => {
     if (calamity) calamity.src = scene.calamity.imagePath;
 }
 
-const node = document.querySelector('input[type=number]');
-const input$ = fromEvent(node, 'input')
-                    .pipe(map((evt: any) => evt.target.value));
+let processNumber = (n: any) => {
 
-input$.subscribe({
-    next: n => {
-        console.log(`Memory mapping ${n}!`)
-        let scene = numberToScene(n);
-        renderLabels(scene, "label");
-        
+    console.log(`Memory mapping ${n}!`);
+
+    let reverseElement: any = document.getElementById("leftToRightCheckbox");
+    let shouldReverse = reverseElement.checked;
+    let scene;
+
+    if (shouldReverse) {
         let arr = n.toString().split('').reverse();
         if (arr.length >= 2) {
             let temp = arr[arr.length-1];
             arr[arr.length-1] = arr[arr.length-2];
             arr[arr.length-2] = temp;
-        }
 
-        let reverseN = parseInt(arr.join(''));
-        let reverseScene = numberToScene(reverseN);
-        renderLabels(reverseScene, "reverseLabel");
-        renderScene(reverseScene);
+            let reverseN = parseInt(arr.join(''));
+            scene = numberToScene(reverseN);
+        }
+        else {
+            scene = numberToScene(n);
+        }
+    }
+    else {
+        scene = numberToScene(n);
+    }
+    renderLabels(scene, "label");
+    renderScene(scene);
+}
+
+const node = document.querySelector('input[type=number]');
+const input$ = fromEvent(node, 'input')
+                    .pipe(map((evt: any) => evt.target.value));
+
+
+let checkbox: any = document.getElementById("leftToRightCheckbox");
+checkbox.addEventListener('change', (event: any) => {
+    let numberElement: any = document.querySelector('input[type=number]');
+    processNumber(numberElement.value);
+  })
+
+input$.subscribe({
+    next: n => {
+        processNumber(n);
     },
     error: err => console.log(`Oops... ${err}`),
     complete: () => console.log(`Complete!`),
