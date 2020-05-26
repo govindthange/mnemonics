@@ -174,7 +174,16 @@
             object-fit: scale-down;
         }
 
-        #planet {
+        .simple-label {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            object-fit: none;
+            border-radius: 64px;
+            border: 1px solid blue;
+        }
+
+        .small-img {
             object-fit: contain;
             border: none;
         }
@@ -190,14 +199,15 @@
         <div class="label" id="label"></div>
     </div>
     <div>
-        <img id="planet"></img>
+        <img class="small-img" id="planet"></img>
         <img class="danger" id="calamity"></img>
         <img id="loci"></img>
         <img id="station"></img>
         <img id="organ"></img>
         <img id="injury"></img>
-        <img id="role"></img>
-        <img id="character"></img>
+        <span class="simple-label" id="role"></span>
+        <img class="small-img" id="character"></img>
+        <span class="simple-label" id="characterLabel"></span>
         <span class="group site" id="site">
             <!-- <img class="ground" id="ground"></img> -->
             <img class="location" id="location"></img>

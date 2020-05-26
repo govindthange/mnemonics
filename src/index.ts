@@ -10,10 +10,10 @@ const conditionLabels: string[] = [", with a SCRATCHED surface revealing its ins
 
 // https://www.spycolor.com/color-index,g
 const colorCodes: string[] = ["#f0f0f1", "#00f5ff", "#000080", "magenta", "red", "#ccff00", "#4f0013", "#ffd700", "white", "black"];
-const colorLabels: string[] = ["SILVER color, somewhere ", "TURQUOISE color, somewhere ", "NAVY-BLUE color, somewhere ", "MAROON color, somewhere ", "RED color, somewhere ", "LEMON color, somewhere ", "CHOCOLATY color, somewhere ", "GOLD color, somewhere ", "WHITE color, somewhere ", "BLACK color, somewhere "];
+const colorLabels: string[] = ["SILVER color, somewhere ", "TURQUOISE color, somewhere ", "NAVY-blue color, somewhere ", "MAROON color, somewhere ", "RED color, somewhere ", "LEMON color, somewhere ", "CHOCOLATY color, somewhere ", "GOLD color, somewhere ", "WHITE color, somewhere ", "BLACK color, somewhere "];
 
 const locationImages: string[] = ["0-city.png", "1-desert.png", "2-north-pole.png", "3-mountain.png", "4-river.png", "5-lake.png", "6-jungle.png", "7-coast.png", "8-waterfall.png", "9-party.png"];
-const locationLabels: string[] = ["within the CITY center", "within a DESERT", "at the NORTH POLE", "within MOUNTAINS", "along side the RIVER", "by the LAKE", "in the JUNGLE", "at the COAST", "near the WATERFALL", "at the PARTY DESTINATION"];
+const locationLabels: string[] = ["within the CITY-center", "within a DESERT", "at the NORTH POLE", "within MOUNTAINS", "along side the RIVER", "by the LAKE", "in the JUNGLE", "at the COAST", "near the WATERFALL", "at the PARTY DESTINATION"];
 const weatherImages: string[] = ["0-snowfall.png", "1-dust.png", "2-normal2.png", "3-moist.png", "4-rain.png", "5-lightning.png", "6-chilling-air.png", "7-cloud.png", "8-fog.png", "9-pollution.png"];
 const weatherLabels: string[] = [" while SNOWFALL"," in DUSTY weather"," in NORMAL weather"," in MOIST and humid weather"," under RAIN"," in heavy thunder LIGTNING"," in CHILLING weather"," under CLEAR SKY"," in FOGGY weather conditions"," POLLUTED by heavy traffic"];
 const timeColorCodes: string[] = ["black", "#191D30", "#93ABB5", "#87ceeb", "#d7e8fd", "#D4FFF7", "#FEFFD4", "#d7e8fd", "#455270", "#2C3342"];
@@ -25,6 +25,35 @@ const soundLabels: string[] = [" in a total SILENCE.", " with a dull THUD sound.
 const calamityImages: string[] = ["0-tsunami.png", "1-draught.png", "2-nuclear-war.png", "3-mob-lynching.png", "4-earthquake.png", "5-landslide.png", "6-jungle-fire.png", "7-comet.png", "8-volcano.png", "9-bomb.png"];
 
 const planetImages: string[] = ["0-sun.png", "1-mercury.png", "2-venus.png", "3-earth.png", "4-mars.png", "5-jupiter.png", "6-saturn.png", "7-neptune.png", "8-uranus.png", "9-pluto.png"];
+
+const roles: string[] = ["SUPERHEROES", "TYCOONS", "ANIMALS", "The senior manager ", "RELATIVES", "LEADERS", "CHACHA", "COLLEAGUES", "WORSHIP (god)", "BIRDS"];
+const roleLabels: string[] = ["The POWERFUL ", "The business TYCOON Mr. ", "The wild ", "The senior MANAGER Mr. ", "My close RELATIVE Mr. ", "The nation LEADER Mr. ", "The CHACHA dancer ", "My helping COLLEAGUE ", "The most WORSHIPED almighty ", "A small BIRD "];
+
+const actors: string[][] = [
+                        ["SUPERMAN", "THOR", "ANTMAN", "captain MARVEL", "IRONMAN", "HULK", "JAMES bond", "CAPTAIN america", "WONDERWOMAN", "BATMAN"],
+                        ["SANJAY leela bhansali (films)", "DONALD TRUMP - BUSINESS", "NARAYAN murthi (software services)", "MUKESH ambani (business)", "RATAN tata (industrialist)", "LAKHANI", "?", "EKTA kapoor (tv)", "VIJAY mallya (liquor king)", "BILL gates (software)"],
+                        ["ZEBRA", "DEER", "NEWT", "MONKEY", "RHINO", "LION", "GIRAFFE", "KANGAROO", "FOX", "BEAR (grizzly)"],
+                        ["SHRIRAM", "TODD", "NIRMAL", "AMIT", "RYAN", "ALESSANDRO", "AJIT", "CHRIS", "VIKAS", "PRASAD"],
+                        ["SAUTADEKAR", "THANGE", "NARAWADE", "MOHITE", "R?", "LOKHANDE", "SHELKE", "GUJAL", "WALKE", "BAHIRAT patil"],
+                        ["XI-jinping", "DONALD-trump", "NARENDRA-modi", "MAHATMA-gandhi", "RAHUL-gandhi", "LAL-bahadur-shastri", "JAWAHARLAL-nehru", "KIM-jong-un", "FAROOQ-abdullah", "BARAK-obama"],
+                        ["SALMAN", "Tiger shroff", "NANA patekar", "MJ", "HRITIK", "HELEN", "SHAHID kapoor", "GOVINDA", "VARUN dhawan", "PRABHU deva"],
+                        ["SHREEYASH", "THOMAS", "ANIL", "MANISH", "ARUN", "ALI", "CHANDRA", "GANESH", "AVINASH", "BASAV"],
+                        ["SAI baba", "TIRUPATI BALAJI", "NATRAJ", "MARUTI", "RAM", "LAXMI", "CHAMUNDA", "GANESHA", "VISHNU", "BHRAMMA"],
+                        ["OSTRICH", "DUCK", "NIGHTINGALE", "HUMMINGBIRD", "ROBIN (eurpean)", "LARK", "CHICKEN", "KINGFISHER", "FLAMINGO", "PEACOCK"]
+                    ];
+    const actorImages: string[][] = [
+                        [],
+                        [],
+                        ["/2-animals/0-zebra.png", "/2-animals/1-deer.png", "/2-animals/2-newt.png", "/2-animals/3-monkey.png", "/2-animals/4-rhino.png", "/2-animals/5-lion.png", "/2-animals/6-giraffe.png", "/2-animals/7-kangaroo.png", "/2-animals/8-fox.png", "/2-animals/9-bear-grizzly.png" ],
+                        [],
+                        [],
+                        ["/5-leaders/0-xi-jinping.png", "/5-leaders/1-donald-trump.png", "/5-leaders/2-narendra-modi.png", "/5-leaders/3-mahatma-gandhi.png", "/5-leaders/4-rahul-gandhi.png", "/5-leaders/5-lal-bahadur-shastri.png", "/5-leaders/6-jawaharlal-nehru.png", "/5-leaders/7-kim-jong-un.png", "/5-leaders/8-farooq-abdullah.png", "/5-leaders/9-barak-obama.png"],
+                        [],
+                        [],
+                        [],
+                        ["/9-birds/0-ostrich.png", "/9-birds/1-duck.png", "/9-birds/2-nightingale.png", "/9-birds/3-hummingbird.png", "/9-birds/4-robin-eurpean.png", "/9-birds/5-lark.png", "/9-birds/6-chicken.png", "/9-birds/7-kingfisher.png", "/9-birds/8-flamingo.png", "/9-birds/9-peacock.png"]
+                    ];
+
 /*
 * 1. Setup the PROP to map 4 digits
 */
@@ -144,10 +173,14 @@ let numberToScene = (n: number) => {
         },
         actor: {
             role: {
-                
+                n: actorRoleIdx,
+                label: roleLabels[actorRoleIdx]
             },
             character: {
-                
+                n: actorCharacterIdx,
+                label: actors[actorRoleIdx][actorCharacterIdx],
+                image: actorImages[actorRoleIdx][actorCharacterIdx],
+                imagePath: "./images/actors"
             },
             organ: {
                 
@@ -198,7 +231,11 @@ let renderLabels= (scene: any, labelId: string) => {
                 + tagText(scene.site.location)
                 + tagText(scene.site.weather)
                 + tagText(scene.site.time)
-                + tagText(scene.site.sound);
+                + tagText(scene.site.sound)
+                + tagText(scene.actor.role)
+                + " "
+                + tagText(scene.actor.character)
+                + " enters the scene. ";
     
     let label: any = document.getElementById(labelId);
     if (label) label.innerHTML = "Picture a " + text;
@@ -238,6 +275,15 @@ let renderScene = (scene: any) => {
 
     renderSite(scene, "", "clip-art/");
     renderSite(scene, "Real", "real/");
+
+    let role: any = document.getElementById("role");
+    if (role) role.innerHTML = scene.actor.role;
+
+    let character: any = document.getElementById("character");
+    if (character) character.src = scene.actor.character.imagePath + scene.actor.character.image;
+
+    let characterLabel: any = document.getElementById("characterLabel");
+    if (characterLabel) characterLabel.text = scene.actor.character;
 
     let calamity: any = document.getElementById("calamity");
     if (calamity) calamity.src = scene.calamity.imagePath + scene.calamity.image;
