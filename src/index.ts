@@ -321,6 +321,8 @@ let processNumber = (n: any) => {
     renderScene(scene);
 }
 
+// .replace(/[sz]|ce|tio/gi,0).replace(/[td]/gi,1).replace(/[n]/gi,2).replace(/[m]/gi, 3).replace(/[r]/gi,4).replace(/[l]/gi, 5).replace(/([j]|ch|ge)/gi, 6).replace(/[ckg]/gi, 7).replace(/[fvw]/gi,8).replace(/[pb]/gi,9).replace(/[aeiouy]/gi,"");
+
 const node = document.querySelector('input[type=number]');
 const input$ = fromEvent(node, 'input')
                     .pipe(map((evt: any) => evt.target.value));
