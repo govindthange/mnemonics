@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href=".\style.css"></link> -->
+    <style>
+        img {
+            display: none
+        }
+
+        .keyword {
+            color: black;
+            text-transform: lowercase;
+            font-weight: bold;
+        }
+
+        .keyword-tag {
+            color: red;
+            font-size: xx-small;
+            font-style: italic;
+            margin-left: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <input id="numberInput" type="number" maxlength="8" autocomplete="off" />
+        <input id="leftToRightCheckbox" type="checkbox" checked>Proces from left to right.</input>
+    </form>
+    <div class="label-group">
+        <div class="label" id="label"></div>
+    </div>
+    <div>
+        <img class="small-img" id="planet"></img>
+        <img class="danger" id="calamity"></img>
+        <img id="loci"></img>
+        <img id="station"></img>
+        <img id="organ"></img>
+        <img id="injury"></img>
+        <div class="simple-label" id="role"></div>
+        <img class="small-img" id="character"></img>
+        <div class="simple-label" id="characterLabel"></div>
+        <div class="group site" id="site">
+            <!-- <img class="ground" id="ground"></img> -->
+            <img class="location" id="location"></img>
+            <img class="time" id="time"></img>
+            <div class="clock" id="clock"></div>
+            <img class="weather" id="weather"></img>
+        </div>
+        <div class="group">
+            <div id="color">
+                <img id="condition"></img>
+            </div>
+            <img id="object"></img>
+        </div>
+    </div>
+    <div>
+        <div class="group site" id="siteReal">
+            <img class="location" id="locationReal"></img>
+            <img class="time" id="timeReal"></img>
+            <div class="clock" id="clockReal"></div>
+            <img class="weather" id="weatherReal"></img>
+        </div>
+    </div>
+    <script src="/bundle.js"></script>
+</body>
+
+</html>
