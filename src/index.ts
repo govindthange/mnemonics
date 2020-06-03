@@ -5,8 +5,10 @@ import { map, filter, scan } from "rxjs/operators";
 const propImages: string[] = ["00-saw.png", "01-seed.png", "02-snow.png", "03-sumo.png", "04-sierra.png", "05-soil.png", "06-sewage.png", "07-sack.png", "08-sofa.png", "09-soap.png", "10-tissue.png", "11-toad.png", "12-tin.png", "13-dome.png", "14-tyre.png", "15-doll.png", "16-dish.png", "17-deck.png", "18-tv.png", "19-tap.png", "20-news.png", "21-net.png", "22-nanny.png", "23-NEEM.png", "24-sonar.png", "25-nail.png", "26-snowshoe.png", "27-nuke.png", "28-knife.png", "29-nib.png", "30-maze.png", "31-mat.png", "32-mine.png", "33-mummy.png", "34-hammer.png", "35-mail.png", "36-match.png", "37-mug.png", "38-movie.png", "39-mop.png", "40-rice.png", "41-rod.png", "42-rain.png", "43-ram.png", "44-rar.png", "45-rail.png", "no-image.png", "47-rake.png", "48-roof.png", "49-rope.png", "50-lace.png", "51-led.png", "52-lane.png", "no-image.png", "54-lorry.png", "55-lily.png", "56-leash.png", "57-lock.png", "58-leaf.png", "59-lab.png", "60-juice.png", "61-jet.png", "62-genie.png", "63-gem.png", "64-jar.png", "65-jail.png", "66-judge.png", "67-jack.png", "68-chef.png", "69-jeep.png", "70-gas.png", "71-kite.png", "72-gun.png", "73-cam.png", "74-car.png", "75-coil.png", "76-cash.png", "77-cake.png", "78-cuff.png", "79-cup.png", "80-vace.png", "81-video.png", "82-fan.png", "83-foam.png", "84-fire.png", "85-foil.png", "86-fish.png", "87-fog.png", "88-fifa.png", "89-vip.png", "90-bus.png", "91-bed.png", "92-bin.png", "93-palm.png", "94-bar.png", "95-bell.png", "96-pouch.png", "97-bike.png", "98-buffet.png", "99-pipe.png"];
 const propLabels: string[] = ["SAW","SEED","SNOWMAN","SUMO","SIERRframe","SOIL","SEWAGE pipe","SACK","SOFA","SOAP","TISSUE","TOAD","TIN","DOME","TYRE","DOLL","DISH","DECK","TV","TAP","NEWS","NET","NANNY","NEEM","SONAR sensor","NAIL","SNOWSHOE","NUKE","KNIFE","NIB","MAZE","MAT","MINE","MUMMY","HAMMER","MAIL","MATCH","MUG","MOVIE","MOP","RICE","ROD","RAIN","RAM","RAR","RAIL", "RIDGE", "RAKE","ROOF","ROPE","LACE","LED","LANE", "LOOM", "LORRY","LILY","LEASH","LOCK","LEAF","LAB","JUICE","JET","GENIE","GEM","JAR","JAIL","JUDGE","JACK","CHEF","JEEP","GAS","KITE","GUN","CAM","CAR","COIL","CASH","CAKE","CUFF","CUP","VACE","VIDEO","FAN","FOAM","FIRE","FOIL","FISH","FOGG deodorant spray","FIFA","VIP pass","BUS","BED","BIN","PALM","BAR","BELL","POUCH","BIKE","BUFFET","PIPE"];
 
+const textureLabels: string[] = ["having SANDY texture", "having TRANSLUCENT surface", "covered with NYLON ", "with MOSAIC styled", "having ROCKY surface", "having LEATHERY texture", "having JELLIFIED thin membrane ", "having GLASSY exterior", "having WOODEN surface", "having PAPERED exterior"];
+
 const conditionImages: string[] = ["0-scratched.png", "1-tarred.png", "2-nailed.png", "3-muddied.png", "4-rusted.png", "5-labelled.png", "6-jagged.png", "7-glitter.png", "8-firedup.png", "9-papered.png"];
-const conditionLabels: string[] = [", with a SCRATCHED surface revealing its inside ", ", covered with TAR in ", ", sealed using NAILS in ", ", in a MUDDIED ", ", RUSTED in ", ", LABELLED in ", ", with JAGGED sharp corners & edges painted in", ", decorated in GLITTERING ", ", emitting FLAMES in ", ", all PAPERED in "];
+const conditionLabels: string[] = [" with deep SCRATCHES, ", " with DENTS/DAMP body, ", " very NEW, novel and neat, ", " with MUDDIED parts, ", " with RUSTED parts, ", " and ELECTROCUTED for safety, ", " with JAGGED sharp corners & edges",, " decorated all over in GLITTERS, ", " but FLAKY, ", "and PUFFED out "];
 
 // https://www.spycolor.com/color-index,g
 const colorCodes: string[] = ["#f0f0f1", "#00f5ff", "#000080", "magenta", "red", "#ccff00", "#4f0013", "#ffd700", "white", "black"];
@@ -60,8 +62,8 @@ const actors: string[][] = [
 // Picture the object (1st 2 digits)
 const OBJECT_PLACE = 1;
 // Picture that object's condition and the qualifying color of its condition (2nd 2 digits)
-const CONDITION_PLACE = 100; // 3rd digit from right
-const COLOR_PLACE = 1000; // 4th digit from right
+const TEXTURE_PLACE = 100; // 3rd digit from right
+const CONDITION_PLACE = 1000; // 4th digit from right
 
 /*
 * 2. Setup the SITE to map next 3 digits
@@ -80,8 +82,8 @@ const SOUND_PLACE = 10000000; // 7th digit from right
 const ROLE_PLACE = 100000000; // 9th digit from right
 const CHARACTER_PLACE = 1000000000; // 8th digit from right
 // Picture the actor's injury (Next 2 digits)
-const ORGAN_PLACE = 10000000000; // 11th digit from right
-const INJURY_PLACE = 100000000000; // 12th digit from right
+const ATTIRE_PLACE = 10000000000; // 11th digit from right
+const COLOR_PLACE = 100000000000; // 12th digit from right
 const FEELINGS_PLACE = 1000000000000; // 13th digit from right
 
 /*
@@ -108,16 +110,16 @@ let numberToScene = (n: number) => {
     n = n ? n : 0;
 
     let propObjectIdx = getPegIndex(n, OBJECT_PLACE, 2);
+    let propTextureIdx = getPegIndex(n, TEXTURE_PLACE, 2);
     let propConditionIdx = getPegIndex(n, CONDITION_PLACE, 1);
-    let propColorIdx = getPegIndex(n, COLOR_PLACE, 1);
     let siteLocationIdx = getPegIndex(n, LOCATION_PLACE, 1);
     let siteWeatherIdx = getPegIndex(n, WEATHER_PLACE, 1);
     let siteTimeIdx = getPegIndex(n, TIME_PLACE, 1);
     let siteSoundIdx = getPegIndex(n, SOUND_PLACE, 1);
     let actorRoleIdx = getPegIndex(n, ROLE_PLACE, 1);
     let actorCharacterIdx = getPegIndex(n, CHARACTER_PLACE, 1);
-    let actorOrganIdx = getPegIndex(n, ORGAN_PLACE, 1);
-    let actorInjuryIdx = getPegIndex(n, INJURY_PLACE, 1);
+    let actorAttireIdx = getPegIndex(n, ATTIRE_PLACE, 1);
+    let actorAttireColorIdx = getPegIndex(n, COLOR_PLACE, 1);
     let actorFeelingsIdx = getPegIndex(n, FEELINGS_PLACE, 1);
     let palaceLociIdx = getPegIndex(n, LOCI_PLACE, 1);
     let palaceStationIdx = getPegIndex(n, STATION_PLACE, 1);
@@ -133,16 +135,17 @@ let numberToScene = (n: number) => {
                 image: propImages[propObjectIdx],
                 imagePath: "./images/objects/"
             },
+            texture: {
+                n: propTextureIdx,
+                label: textureLabels[propObjectIdx],
+                //image: textureImages[propObjectIdx],
+                //imagePath: "./images/object-texture/"
+            },
             condition: {
                 n: propConditionIdx,
                 label: conditionLabels[propConditionIdx],
                 image: conditionImages[propConditionIdx],
                 imagePath: "./images/object-conditions/"
-            },
-            color: {
-                n: propColorIdx,
-                label: colorLabels[propColorIdx],
-                color: colorCodes[propColorIdx]
             }
         },
         site: {
@@ -181,6 +184,14 @@ let numberToScene = (n: number) => {
                 label: actors[actorRoleIdx][actorCharacterIdx],
                 image: actorImages[actorRoleIdx][actorCharacterIdx],
                 imagePath: "./images/actors"
+            },
+            attire: {
+
+            },
+            color: {
+                n: actorAttireColorIdx,
+                label: colorLabels[actorAttireColorIdx],
+                color: colorCodes[actorAttireColorIdx]
             },
             organ: {
                 
@@ -226,16 +237,16 @@ let renderLabels= (scene: any, labelId: string) => {
     console.log("Rendering label for Scene %o", scene);
 
     let text = tagText(scene.prop.object)
+                + tagText(scene.prop.texture)
                 + tagText(scene.prop.condition)
-                + tagText(scene.prop.color)
+                + " and a "
+                + tagText(scene.actor.character)
+                + " enters the scene. "
                 + tagText(scene.site.location)
                 + tagText(scene.site.weather)
                 + tagText(scene.site.time)
                 + tagText(scene.site.sound)
-                + tagText(scene.actor.role)
-                + " "
-                + tagText(scene.actor.character)
-                + " enters the scene. ";
+                + tagText(scene.actor.role);
     
     let label: any = document.getElementById(labelId);
     if (label) label.innerHTML = "Picture a " + text;
@@ -271,7 +282,7 @@ let renderScene = (scene: any) => {
     }
 
     let color: any = document.getElementById("color");
-    if (color) color.style.backgroundColor = scene.prop.color.color;
+    if (color) color.style.backgroundColor = scene.actor.color.color;
 
     renderSite(scene, "", "clip-art/");
     renderSite(scene, "Real", "real/");
