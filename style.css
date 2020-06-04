@@ -40,6 +40,14 @@ form {
     font-weight: bold;
 }
 
+.keyword2 {
+    color: black;
+    margin-left: 3px;
+    margin-right: 3px;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
 .keyword-tag {
     top: 20px;
     color: blue;
