@@ -1,0 +1,22 @@
+img {
+    display: none
+}
+
+textarea {
+    width: 100%;
+    height: 40px;
+}
+
+.keyword {
+    color: black;
+    text-transform: lowercase;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.keyword-tag {
+    color: red;
+    font-size: xx-small;
+    font-style: italic;
+    position: fixed;
+}

@@ -233,42 +233,65 @@ class Scene {
         }
     }
 
-    public encode(str: string): string {
-        return str.replace(/[sz]|ce|tio/gi, "0")
+    static encode(str: string): string {
+        return str.replace(/[sz]|ce|cy|tio/gi, "0")
                     .replace(/[td]/gi, "1")
                     .replace(/[n]/gi, "2")
                     .replace(/[m]/gi, "3")
                     .replace(/[r]/gi, "4")
                     .replace(/[l]/gi, "5")
                     .replace(/([j]|ch|ge)/gi, "6")
-                    .replace(/[ckg]/gi, "7")
+                    .replace(/[ckgq]/gi, "7")
                     .replace(/[fvw]/gi, "8")
                     .replace(/[pb]/gi, "9")
-                    .replace(/[aeiouy]/gi, "");
+                    .replace(/[aeiouyh]/gi, "");
     }
 
     public toString(): string {
-        return "Imagine a " 
-                + this.tagText(this.prop.object)
-                + this.tagText(this.prop.texture)
-                + this.tagText(this.prop.condition)
-                + " A"
-                + this.tagText(this.actor.role)
-                + this.tagText(this.actor.character, "2")
-                + " appears in a "
-                + this.tagText(this.actor.attireColor)
-                + this.tagText(this.actor.attire)
-                + ". Suddenly s/he "
-                + this.tagText(this.actor.assault)
-                + ", gets hit on the "
-                + this.tagText(this.actor.body)
-                + " incurring a huge "
-                + this.tagText(this.actor.injury)
-                + ". S/he escapes and hides "
-                + this.tagText(this.site.location)
-                + this.tagText(this.site.weather)
-                + this.tagText(this.site.time)
-                + this.tagText(this.site.sound);
+       
+        let inputLength: number = this.n.toString().length;
+
+        let output: string = this.tagText(this.prop.object);
+        
+        if (inputLength > 2) {
+            output += this.tagText(this.prop.texture)
+                    + this.tagText(this.prop.condition);
+        }
+
+        if (inputLength > 4) {
+            output += " A"
+                    + this.tagText(this.actor.role)
+                    + this.tagText(this.actor.character, "2")
+                    + " appears";
+        }
+
+        if (inputLength > 6) {
+            output += " in a"
+                    + this.tagText(this.actor.attireColor)
+                    + this.tagText(this.actor.attire);
+        }
+
+        if (inputLength > 8) {
+            output += ". Suddenly s/he "
+                        + this.tagText(this.actor.assault);
+        }
+
+        if (inputLength > 9) {
+            output += ", gets hit on the "
+                        + this.tagText(this.actor.body)
+                        + " incurring a huge "
+                        + this.tagText(this.actor.injury);
+        }
+
+        if (inputLength > 11) {
+            output += ". S/he escapes and hides "
+                        + this.tagText(this.site.location)
+                        + this.tagText(this.site.weather)
+                        + this.tagText(this.site.time)
+                        + this.tagText(this.site.sound);
+        }
+        
+        return output + ".";
     }
 
     tagText(obj: any, cls: any = "", format: boolean = true) {
