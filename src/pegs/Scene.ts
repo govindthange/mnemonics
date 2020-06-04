@@ -259,10 +259,9 @@ class Scene {
         }
 
         if (inputLength > 4) {
-            output += " A"
+            output += " Next, a"
                     + this.tagText(this.actor.role)
-                    + this.tagText(this.actor.character, "2")
-                    + " appears";
+                    + this.tagText(this.actor.character, "2");
         }
 
         if (inputLength > 6) {
