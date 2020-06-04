@@ -5,7 +5,7 @@ class Store {
     propLabels: string[] = ["SAW", "SEED", "SNOWMAN", "SUMO", "SIERRframe", "SOIL", "SEWAGE pipe", "SACK", "SOFA", "SOAP", "TISSUE", "TOAD", "TIN", "DOME", "TYRE", "DOLL", "DISH", "DECK", "TV", "TAP", "NEWS", "NET", "NANNY", "NEEM", "SONAR sensor", "NAIL", "SNOWSHOE", "NUKE", "KNIFE", "NIB", "MAZE", "MAT", "MINE", "MUMMY", "HAMMER", "MAIL", "MATCH", "MUG", "MOVIE", "MOP", "RICE", "ROD", "RAIN", "RAM", "RAR", "RAIL", "RIDGE", "RAKE", "ROOF", "ROPE", "LACE", "LED", "LANE", "LOOM", "LORRY", "LILY", "LEASH", "LOCK", "LEAF", "LAB", "JUICE", "JET", "GENIE", "GEM", "JAR", "JAIL", "JUDGE", "JACK", "CHEF", "JEEP", "GAS", "KITE", "GUN", "CAM", "CAR", "COIL", "CASH", "CAKE", "CUFF", "CUP", "VACE", "VIDEO", "FAN", "FOAM", "FIRE", "FOIL", "FISH", "FOGG deodorant spray", "FIFA", "VIP pass", "BUS", "BED", "BIN", "PALM", "BAR", "BELL", "POUCH", "BIKE", "BUFFET table ", "PIPE"];
     textureLabels: string[] = ["having SANDY texture", "having TRANSLUCENT surface", "covered in NYLON clothing", "having MOSAIC surface", "having ROCKY surface", "having LEATHERY texture", "having a JELLIFIED thin membrane ", "having GLASSY exterior", "having WOODEN surface", "having PAPERED exterior"];
     conditionImages: string[] = ["0-scratched.png", "1-tarred.png", "2-nailed.png", "3-muddied.png", "4-rusted.png", "5-labelled.png", "6-jagged.png", "7-glitter.png", "8-firedup.png", "9-papered.png"];
-    conditionLabels: string[] = [" with deep SCRATCHES.", " with deep [DENTS/DAMP] body.", " very NEW, novel and neat.", " with MUDDIED parts.", " with RUSTED parts.", " being ELECTROCUTED for safety.", " with JAGGED sharp corners & edges.", , " decorated all over in GLITTERS.", " but FLAKY.", "and PUFFED out."];
+    conditionLabels: string[] = [" with deep SCRATCHES.", " with deep [DENTS/DAMP] body.", " very NEW, novel and neat.", " with MUDDIED parts.", " with RUSTED parts.", " being ELECTROCUTED for safety.", " with JAGGED sharp corners & edges.", " decorated all over in GLITTERS.", " but FLAKY.", "and PUFFED out."];
 
     roles: string[] = ["SUPERHEROE", "TYCOON", "NATURELOVER", "MOVIESTAR", "ROCKSTAR", "LEGEND", "CHACHA", "CRICKETER", "VILLAIN", "POLITICIAN"];
     roleLabels: string[] = [" POWERFUL ", " rich TYCOON Mr. ", " wildly NATURE lover ", " famous bollowood MOVIE star Mr. ", "n international ROCK star ", " bollywood's LEGEND Mr. ", " famous Indian CHACHA dancer ", " world famous Indian CRICKETER Mr. ", " famous bolloywood VILLAIN ", "n international POLITICAL figure Mr. "];
@@ -35,13 +35,13 @@ class Store {
     ];
 
     actorAttireImages: string[] = ["no-image.png", "no-image.png", "no-image.png", "no-image.png", "no-image.png", "no-image.png", "no-image.png", "no-image.png", "no-image.png", "no-image.png"];
-    actorAttireLabels: string[] = ["SUITE", "DHOTI Kurta", "KNICKERS & T Shirt", "MILITARY Uniform", "RAINCOAT", "LEATHER Jacket & Jeans", "JEANS & T-Shirt", "KURTA Pyjama", "FIREFIGHTER Uniform / Vest", "BATHROBE"];
+    actorAttireLabels: string[] = ["SUITE", "DHOTI", "KNICKERS", "MILITARY Uniform", "RAINCOAT", "LEATHER outfit", "JEANS & T-Shirt", "KURTA Pyjama", "FIREFIGHTER Uniform", "BATHROBE"];
 
     // https://www.spycolor.com/color-index,g
     actorAttireColorCodes: string[] = ["#f0f0f1", "#00f5ff", "#000080", "magenta", "red", "#ccff00", "#4f0013", "#ffd700", "white", "black"];
     actorAttireColorLabels: string[] = ["SILVER ", "TURQUOISE ", "NAVY-blue ", "MAROON ", "RED ", "LEMON ", "CHOCOLATY ", "GOLDEND ", "WHITE ", "BLACK "];
 
-    actorAssaultLabels: string[] = ["is shot by a double barrel SHOTGUN", "is attacked by a TROOP", "is attacked by a NINJA", "is shot by a MACHINE Gun", "is shot by a REVOLVER", "falls on a ELECTROCUTED barbedwire", "is attacked by a CHOPPER", "is hit by a GRENADE", "is attacked by a FIGHTER Plane", "is attacked by a BAZOOKA"];
+    actorAssaultLabels: string[] = ["is shot by a double barrel SHOTGUN", "is attacked by a TROOP", "is attacked by a NINJA", "is shot by a MACHINE Gun", "is shot by a REVOLVER", "falls on a ELECTROCUTED barbedwire", "is attacked by a CHOPPER", "is hit by a GRENADE", "is attacked by a FIGHTER jet", "is attacked by a BAZOOKA"];
     actorBodyLabels: string[] = ["STOMACH", "TOES", "NECK", "MOUTH", "WRIST", "LEGS", "CHEST", "GROIN", "WAIST", "BACK"];
     actorInjuryLabels: string[] = ["SWELLING", "TRAUMA ", "NUMBED", "MAULED", "RASHES due to bacterial infection", "LIMP", "SHACKLED", "CUT", "FRACTURED", "PUNCTURED"];
 
