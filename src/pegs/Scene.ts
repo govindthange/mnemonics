@@ -263,7 +263,7 @@ class Scene {
         }
 
         if (inputLength > 4) {
-            output += ". Standing next is a"
+            output += ". Along side a"
                 + this.tagText(this.actor.role)
                 + this.tagText(this.actor.character, "", true, true);
         }
