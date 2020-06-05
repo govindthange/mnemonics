@@ -14,7 +14,7 @@ class Scene {
     static textureLabels: string[];
     static conditionImages: string[];
     static conditionLabels: string[];
-    
+
     static roles: string[];
     static roleLabels: string[];
     static actors: string[][];
@@ -26,7 +26,7 @@ class Scene {
     static actorAssaultLabels: string[];
     static actorBodyLabels: string[];
     static actorInjuryLabels: string[];
-    
+
     static locationImages: string[];
     static locationLabels: string[];
     static weatherImages: string[];
@@ -36,9 +36,13 @@ class Scene {
     static timeLabels: string[];
     static clockLabels: string[];
     static soundLabels: string[];
-    
+
     static calamityImages: string[];
     static planetImages: string[];
+
+    constructor(n: number = 0, reverse: boolean = true) {
+        this.update(n, reverse);
+    }
 
     static init() {
         let store = new Store();
@@ -80,7 +84,6 @@ class Scene {
     }
 
     process(n: number) {
-        console.log("Processing %d", n);
         this.n = n ? n : 0;
 
         let propObjectIdx = this.getPegIndex(n, Place.OBJECT, 2);
@@ -234,73 +237,123 @@ class Scene {
     }
 
     static encode(str: string): string {
-        return str.replace(/[sz]|ce|cy|tio/gi, "0")
+        return str.replace(/[sz]|ce|cy|ci|tio/gi, "0")
                     .replace(/[td]/gi, "1")
                     .replace(/[n]/gi, "2")
                     .replace(/[m]/gi, "3")
                     .replace(/[r]/gi, "4")
                     .replace(/[l]/gi, "5")
                     .replace(/([j]|ch|ge)/gi, "6")
-                    .replace(/[ckgq]/gi, "7")
+                    .replace(/[ckgqx]/gi, "7")
                     .replace(/[fvw]/gi, "8")
                     .replace(/[pb]/gi, "9")
                     .replace(/[aeiouyh]/gi, "");
     }
 
     public toString(): string {
-       
+
         let inputLength: number = this.n.toString().length;
 
         let output: string = this.tagText(this.prop.object);
-        
+
         if (inputLength > 2) {
-            output += this.tagText(this.prop.texture)
-                    + this.tagText(this.prop.condition);
+            output += " "
+                + this.tagText(this.prop.texture)
+                + this.tagText(this.prop.condition);
         }
 
         if (inputLength > 4) {
-            output += " Next, a"
-                    + this.tagText(this.actor.role)
-                    + this.tagText(this.actor.character, "2");
+            output += ". Standing next is a"
+                + this.tagText(this.actor.role)
+                + this.tagText(this.actor.character, "", true, true);
         }
 
         if (inputLength > 6) {
-            output += " in a"
-                    + this.tagText(this.actor.attireColor)
-                    + this.tagText(this.actor.attire);
+            output += " in a "
+                + this.tagText(this.actor.attireColor)
+                + this.tagText(this.actor.attire);
         }
 
         if (inputLength > 8) {
-            output += ". Suddenly s/he "
-                        + this.tagText(this.actor.assault);
+            output += " who "
+                + this.tagText(this.actor.assault);
         }
 
         if (inputLength > 9) {
-            output += ", gets hit on the "
-                        + this.tagText(this.actor.body)
-                        + " incurring a huge "
-                        + this.tagText(this.actor.injury);
+            output += " on the "
+                + this.tagText(this.actor.body)
+                + " "
+                + this.tagText(this.actor.injury);
         }
 
         if (inputLength > 11) {
             output += ". S/he escapes and hides "
-                        + this.tagText(this.site.location)
-                        + this.tagText(this.site.weather)
-                        + this.tagText(this.site.time)
-                        + this.tagText(this.site.sound);
+                + this.tagText(this.site.location)
+                + this.tagText(this.site.weather)
+                + this.tagText(this.site.time)
+                + this.tagText(this.site.sound);
         }
-        
+
         return output + ".";
     }
 
-    tagText(obj: any, cls: any = "", format: boolean = true) {
+    tagText(obj: any, cls: any = "", format: boolean = true, sentenceCase: boolean = false) {
 
         if (!format) return obj.label;
 
         if (!obj.label) return " [ No label defined ] ";
-    
-        let text: string = obj.label.replace(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g, ` <span class="keyword${cls}">$&<span class="keyword-tag">${obj.n}</span></span> `);
+
+        let capTexts: string[] = obj.label.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
+
+        let text: string = obj.label.replace(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g, `$&<span class="number-tag">${obj.n}</span>`);
+
+        for (let txt of capTexts) {
+            let regex = new RegExp(txt, "gi");
+            if (sentenceCase) {
+                text = text.replace(regex, `<b>${this.capitalizeText(txt)}</b>`);
+            }
+            else {
+                text = text.replace(regex, `<b>${txt.toLowerCase()}</b>`);
+            }
+        }
+
         return text;
+    }
+
+    capitalizeText(str: any) {
+        if (typeof str !== 'string') return ''
+        return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1)
+    }
+
+    static createStory(text: string) {
+        
+        let encoding = Scene.encode(text);
+        let plot: any[] = new Array();
+
+        let story = {
+            script: text,
+            transcript: encoding,
+            plot: plot
+        }
+
+        let arr = encoding.trim().split(" ");
+        for (let item of arr) {
+            if (item.trim().length == 0) {
+                continue;
+            }
+
+            try {
+                if (item.length % 2 != 0) {
+                    item += item[item.length - 1];
+                }
+                let n = parseInt(item);
+                plot.push({key: item, scene: new Scene(n, true)});
+            } catch (error) {
+                plot.push({key: item, error: error});
+            }
+        }
+
+        return story;
     }
 }
 
