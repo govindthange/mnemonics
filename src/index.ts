@@ -7,6 +7,7 @@ import { Scene } from "./pegs/Scene";
 //new DefaultPanel();
 
 $("#showButton").hide();
+
 $('#hideButton').click({}, event => {
     $(".test-controls").hide();
     $("#showButton").show();
@@ -17,26 +18,65 @@ $('#showButton').click({}, event => {
     $("#showButton").hide();
 });
 
+$("#hideHintButton").hide();
+
+$('#showHintButton').click({}, event => {
+    $(".hint").show();
+    $("#hideHintButton").show();
+    $("#showHintButton").hide();
+});
+
+$('#hideHintButton').click({}, event => {
+    $(".hint").hide();
+    $("#hideHintButton").hide();
+    $("#showHintButton").show();
+});
+
+$("#hideAnsButton").hide();
+
+$('#showAnsButton').click({}, event => {
+    $(".answer").show();
+    $("#hideAnsButton").show();
+    $("#showAnsButton").hide();
+});
+
+$('#hideAnsButton').click({}, event => {
+    $(".answer").hide();
+    $("#hideAnsButton").hide();
+    $("#showAnsButton").show();
+});
+
 let renderLabels = (txt: any, labelId: string) => {
     let label: any = document.getElementById(labelId);
     if (label) label.innerHTML = txt;
 }
 
-let processText = (text: any) => {
+let processText = (str: string) => {
 
-    let story: any = Scene.createStory(text);
+    let narration = "";
+
+    let mainTranscript = "";
+    let topStoryline = str.split(",");
     let cnt = 1;
-    let narration = "Imagine following items: <br/>";
-    for(let plot of story.plot) {
-        if (plot.scene) {
-            narration += `<p>${cnt++}. A ${plot.scene} <span class='number-span test-controls'>| ${plot.key}</span></p>`;
+    for (let text of topStoryline) {
+        narration += `<div class='section'><div class='badge'>${cnt}</div>`;
+        let story: any = Scene.createStory(text);
+        let cnt2 = 1;
+        for(let plot of story.plot) {
+            if (plot.scene) {
+                mainTranscript += plot.key + " + ";
+                narration += `<div class='section-item'>A ${plot.scene} <span class='transcript test-controls'>| ${plot.key}</span><span class='hint' style='display: none;'>| ${plot.hint}</span><span class='answer' style='display: none;'>| ${plot.script}</span></div>`;
+            }
+            else {
+                narration +=  `<div>${plot.key} ${plot.error.toString()}</div>`;
+            }
+            cnt2++;
         }
-        else {
-            narration +=  `<p><span class='number-err'>${plot.key}</span>${plot.error.toString()}</p>`;
-        }
+        cnt++;
+        narration += "</div>";
     }
 
-    renderLabels(story.transcript, "transcript");
+    renderLabels(Scene.encode(str).transcript, "transcript");
     renderLabels(narration, "narration");
 }
 

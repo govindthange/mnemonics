@@ -236,18 +236,28 @@ class Scene {
         }
     }
 
-    static encode(str: string): string {
-        return str.replace(/[sz]|ce|cy|ci|tio/gi, "0")
-                    .replace(/[td]/gi, "1")
-                    .replace(/[n]/gi, "2")
-                    .replace(/[m]/gi, "3")
-                    .replace(/[r]/gi, "4")
-                    .replace(/[l]/gi, "5")
-                    .replace(/([j]|ch|ge)/gi, "6")
-                    .replace(/[ckgqx]/gi, "7")
-                    .replace(/[fvw]/gi, "8")
-                    .replace(/[pb]/gi, "9")
-                    .replace(/[aeiouyh]/gi, "");
+    static encode(str: string): any {
+
+        let transcript = str.replace(/igh/gi, "")
+                            .replace(/x/gi, "70")
+                            .replace(/dg/gi, "6")
+                            .replace(/[sz]|ce|cy|ci|tio/gi, "0")
+                            .replace(/[td]/gi, "1")
+                            .replace(/[n]/gi, "2")
+                            .replace(/[m]/gi, "3")
+                            .replace(/[r]/gi, "4")
+                            .replace(/[l]/gi, "5")
+                            .replace(/([j]|ch|ge)/gi, "6")
+                            .replace(/[ckgq]/gi, "7")
+                            .replace(/[fvw]/gi, "8")
+                            .replace(/[pb]/gi, "9");
+
+        let hint: string = "";
+        if (transcript.length>=4) {
+            hint = transcript.substring(0, 3);
+            transcript = transcript.replace(/[aeiouyh]/gi, "");
+        }
+        return { script: str, transcript: transcript, hint: hint};
     }
 
     public toString(): string {
@@ -257,25 +267,27 @@ class Scene {
         let output: string = this.tagText(this.prop.object);
 
         if (inputLength > 2) {
-            output += " "
-                + this.tagText(this.prop.texture)
-                + this.tagText(this.prop.condition);
+            output = this.tagText(this.prop.condition)
+                    + " "
+                    + this.tagText(this.prop.texture)
+                    + " "
+                    + this.tagText(this.prop.object);
         }
 
         if (inputLength > 4) {
-            output += ". Along side a"
-                + this.tagText(this.actor.role)
+            output += " along side "
+                //+ " a" + this.tagText(this.actor.role)
                 + this.tagText(this.actor.character, "", true, true);
         }
 
         if (inputLength > 6) {
-            output += " in a "
+            output += ", in a "
                 + this.tagText(this.actor.attireColor)
                 + this.tagText(this.actor.attire);
         }
 
         if (inputLength > 8) {
-            output += " who "
+            output += ", who "
                 + this.tagText(this.actor.assault);
         }
 
@@ -331,23 +343,33 @@ class Scene {
         let plot: any[] = new Array();
 
         let story = {
-            script: text,
-            transcript: encoding,
+            script: encoding.script,
+            transcript: encoding.transcript,
             plot: plot
         }
 
-        let arr = encoding.trim().split(" ");
+        let arr = text.trim().split(" ");
         for (let item of arr) {
-            if (item.trim().length == 0) {
+            
+            item = item.trim();
+            if (item.length == 0) {
                 continue;
             }
 
+            let obj = Scene.encode(item);
+            let transcript = obj.transcript;
             try {
-                if (item.length % 2 != 0) {
-                    item += item[item.length - 1];
+                if (transcript.length % 2 != 0) {
+                    transcript += transcript[transcript.length - 1];
                 }
-                let n = parseInt(item);
-                plot.push({key: item, scene: new Scene(n, true)});
+                let n = parseInt(transcript);
+                plot.push({
+                    key: transcript.replace(/\D/g, ""),
+                    script: item,
+                    transcript: transcript,
+                    hint: obj.hint,
+                    scene: new Scene(n, true)
+                });
             } catch (error) {
                 plot.push({key: item, error: error});
             }
