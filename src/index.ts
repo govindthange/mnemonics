@@ -59,18 +59,19 @@ let processText = (str: string) => {
     let topStoryline = str.split(",");
     let cnt = 1;
     for (let text of topStoryline) {
-        narration += `<div class='section'><div class='badge'>${cnt}</div>`;
+        narration += `<div class='section'><span class='badge'>${cnt}</span>`;
         let story: any = Scene.createStory(text);
         let cnt2 = 1;
         for(let plot of story.plot) {
             if (plot.scene) {
                 mainTranscript += plot.key + " + ";
-                narration += `<div class='section-item'>A ${plot.scene} <span class='transcript test-controls'>| ${plot.key}</span><span class='hint' style='display: none;'>| ${plot.hint}</span><span class='answer' style='display: none;'>| ${plot.script}</span></div>`;
+                narration += `<span ${ cnt2 > 1 ? 'class="section-item-prefix"' : ''}>A ${plot.scene} <span class='transcript test-controls'>| ${plot.key}</span><span class='hint' style='display: none;'>| ${plot.hint}</span><span class='answer' style='display: none;'>| ${plot.script}</span></span>`;
             }
             else {
-                narration +=  `<div>${plot.key} ${plot.error.toString()}</div>`;
+                narration +=  `<span>${plot.key} ${plot.error.toString()}</span>`;
             }
             cnt2++;
+            narration += "<br/>"
         }
         cnt++;
         narration += "</div>";

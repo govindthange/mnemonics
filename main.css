@@ -16,8 +16,8 @@ textarea {
     border-bottom: 1px solid lightgray;
 }
 
-.section-item {
-    margin-left: 5px;
+.section-item-prefix {
+    margin-left: 35px;
 }
 
 b {
@@ -33,11 +33,13 @@ b {
 
 .badge {
     height: 100%;
+    margin: 5px;
 }
 
 .bullet {
     color: gray;
     margin-right: 5px;
+    margin-top: 5px;
     font-size: small;
 }
 
