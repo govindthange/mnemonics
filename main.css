@@ -1,3 +1,7 @@
+body {
+    margin: 10px;
+}
+
 img {
     display: none
 }
@@ -7,8 +11,17 @@ textarea {
     height: 40%;
 }
 
+.section {
+    margin-left: 5px;
+    border-bottom: 1px solid lightgray;
+}
+
+.section-item {
+    margin-left: 5px;
+}
+
 b {
-    font-size: large;
+    font-size: medium;
     margin-right: 2px;
 }
 
@@ -18,24 +31,46 @@ b {
     margin: 5px;
 }
 
+.badge {
+    height: 100%;
+}
+
+.bullet {
+    color: gray;
+    margin-right: 5px;
+    font-size: small;
+}
+
 .number-tag {
     font-family: cursive;
     color: blue;
     background-color: yellow;
-    font-size: .5em;
+    font-size: .6em;
     font-style: italic;
     /* position: fixed;
     margin-right: 2px;
     margin-bottom: 5px; */
 }
 
-.number-span {
+.transcript {
     font-family: 'Courier New', Courier, monospace;
     color: gray;
     margin-right: 10px;
 }
 
-.number-err {
+.hint {
+    font-family: 'Courier New', Courier, monospace;
+    color: lightgray;
+    margin-right: 10px;
+}
+
+.answer {
+    font-family: 'Courier New', Courier, monospace;
+    color: lightgray;
+    margin-right: 10px;
+}
+
+.error {
     font-family: 'Courier New', Courier, monospace;
     color: red;
     font-weight: bold;
