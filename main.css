@@ -43,15 +43,16 @@ b {
     font-size: small;
 }
 
-.number-tag {
-    font-family: cursive;
+.superscript {
+    vertical-align: super;
+    color: gray;
+    font-size: xx-small;
+}
+
+.subscript {
+    vertical-align: sub;
     color: blue;
-    background-color: yellow;
-    font-size: .6em;
-    font-style: italic;
-    /* position: fixed;
-    margin-right: 2px;
-    margin-bottom: 5px; */
+    font-size: xx-small;
 }
 
 .transcript {

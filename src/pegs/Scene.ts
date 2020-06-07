@@ -275,7 +275,7 @@ class Scene {
         }
 
         if (inputLength > 4) {
-            output += " along side "
+            output += " alongside "
                 //+ " a" + this.tagText(this.actor.role)
                 + this.tagText(this.actor.character, "", true, true);
         }
@@ -317,7 +317,7 @@ class Scene {
 
         let capTexts: string[] = obj.label.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
 
-        let text: string = obj.label.replace(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g, `$&<span class="number-tag">${obj.n}</span>`);
+        let text: string = obj.label.replace(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g, `$&<span class="superscript">${obj.n}</span>`);
 
         for (let txt of capTexts) {
             let regex = new RegExp(txt, "gi");
