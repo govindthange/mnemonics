@@ -32,7 +32,7 @@ $('#hideHintButton').click({}, event => {
     $("#showHintButton").show();
 });
 
-$("#hideAnsButton").hide();
+$("#showAnsButton").hide();
 
 $('#showAnsButton').click({}, event => {
     $(".answer").show();
@@ -69,9 +69,9 @@ let processText = (str: string) => {
                 narration += `<span class='transcript test-controls'>| ${plot.key}</span>`;
                 narration += `<span class='hint' style='display: none;'>| ${plot.hint}</span>`;
                 narration += `<span class='answer'>| ${plot.script}</span>`;
-                narration += `<a class="subscript" target='_blank' href='https://www.rhymezone.com/r/rhyme.cgi?typeofrhyme=adv&org1=syl&org2=l&org3=y&Word=${plot.script}'>1 </a>`;
-                narration += `<a class="subscript" target='_blank' href='https://www.rhymes.net/rhyme/${plot.script}'>2 </a>`;
-                narration += `<a class="subscript" target='_blank' href='https://www.rhymer.com/beginning-rhymes/${plot.script}.html'>3 </a>`;
+                narration += `<a class="subscript hint" target='_blank' href='https://www.rhymezone.com/r/rhyme.cgi?typeofrhyme=adv&org1=syl&org2=l&org3=y&Word=${plot.script}'>1 </a>`;
+                narration += `<a class="subscript hint" target='_blank' href='https://www.rhymes.net/rhyme/${plot.script}'>2 </a>`;
+                narration += `<a class="subscript hint" target='_blank' href='https://www.rhymer.com/beginning-rhymes/${plot.script}.html'>3 </a>`;
                 narration += "</span>";
             }
             else {
