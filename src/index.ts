@@ -65,7 +65,14 @@ let processText = (str: string) => {
         for(let plot of story.plot) {
             if (plot.scene) {
                 mainTranscript += plot.key + " + ";
-                narration += `<span ${ cnt2 > 1 ? 'class="section-item-prefix"' : ''}>A ${plot.scene} <span class='transcript test-controls'>| ${plot.key}</span><span class='hint' style='display: none;'>| ${plot.hint}</span><span class='answer' style='display: none;'>| ${plot.script}</span></span>`;
+                narration += `<span ${ cnt2 > 1 ? 'class="section-item-prefix"' : ''}>A ${plot.scene}`;
+                narration += `<span class='transcript test-controls'>| ${plot.key}</span>`;
+                narration += `<span class='hint' style='display: none;'>| ${plot.hint}</span>`;
+                narration += `<span class='answer'>| ${plot.script}</span>`;
+                narration += `<a class="subscript" target='_blank' href='https://www.rhymezone.com/r/rhyme.cgi?typeofrhyme=adv&org1=syl&org2=l&org3=y&Word=${plot.script}'>1 </a>`;
+                narration += `<a class="subscript" target='_blank' href='https://www.rhymes.net/rhyme/${plot.script}'>2 </a>`;
+                narration += `<a class="subscript" target='_blank' href='https://www.rhymer.com/beginning-rhymes/${plot.script}.html'>3 </a>`;
+                narration += "</span>";
             }
             else {
                 narration +=  `<span>${plot.key} ${plot.error.toString()}</span>`;
