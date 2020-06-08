@@ -52,9 +52,7 @@ let renderLabels = (txt: any, labelId: string) => {
 }
 
 let processText = (str: string) => {
-
     let narration = "";
-
     let mainTranscript = "";
     let topStoryline = str.split(",");
     let cnt = 1;
@@ -75,7 +73,10 @@ let processText = (str: string) => {
                 narration += "</span>";
             }
             else {
-                narration +=  `<span>${plot.key} ${plot.error.toString()}</span>`;
+                narration += `<span>${plot.error.toString()} </span>`;
+                narration += `<span class='transcript test-controls'>| ${plot.key}</span>`;
+                narration += `<span class='hint' style='display: none;'>| ${plot.hint}</span>`;
+                narration += `<span class='answer'>| ${plot.script}</span>`;
             }
             cnt2++;
             narration += "<br/>"
