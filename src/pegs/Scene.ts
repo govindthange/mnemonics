@@ -1,7 +1,7 @@
 import { Store } from "./Store";
 
 class Scene {
-    n: number;
+    n: string;
     prop: any;
     actor: any;
     site: any;
@@ -40,7 +40,7 @@ class Scene {
     static calamityImages: string[];
     static planetImages: string[];
 
-    constructor(n: number = 0, reverse: boolean = true) {
+    constructor(n: string = "00", reverse: boolean = false) {
         this.update(n, reverse);
     }
 
@@ -79,12 +79,15 @@ class Scene {
         Scene.planetImages = store.getPlanetImages();
     }
 
-    public getPegIndex(n: number, decimalPlaceValue: number, numberOfDigitsToExtract: number): number {
-        return ((n - n % decimalPlaceValue) / decimalPlaceValue) % [10, 100][numberOfDigitsToExtract - 1];
+    public getPegIndex(n: string, decimalPlaceValue: number, numberOfDigitsToExtract: number): number {
+        if (n.length >= (decimalPlaceValue + numberOfDigitsToExtract))
+            return parseInt(n.substr(decimalPlaceValue, numberOfDigitsToExtract));
+        else
+            return 0;
     }
 
-    process(n: number) {
-        this.n = n ? n : 0;
+    process(n: string) {
+        this.n = n ? n : "00";
 
         let propObjectIdx = this.getPegIndex(n, Place.OBJECT, 2);
         let propTextureIdx = this.getPegIndex(n, Place.TEXTURE, 1);
@@ -215,7 +218,7 @@ class Scene {
         };
     }
 
-    public update(n: number, reverse: boolean) {
+    public update(n: string, reverse: boolean = false) {
         if (reverse) {
             let arr = n.toString().split('').reverse();
             if (arr.length >= 2) {
@@ -223,8 +226,7 @@ class Scene {
                 arr[arr.length - 1] = arr[arr.length - 2];
                 arr[arr.length - 2] = temp;
 
-                let reverseN = parseInt(arr.join(''));
-                this.process(reverseN);
+                this.process(arr.join(''));
                 return this;
             }
             else {
@@ -255,8 +257,8 @@ class Scene {
         let hint: string = "";
         if (transcript.length>=4) {
             hint = transcript.substring(0, 3);
-            transcript = transcript.replace(/[aeiouyh]/gi, "");
         }
+        transcript = transcript.replace(/[aeiouyh]/gi, "");
         return { script: str, transcript: transcript, hint: hint};
     }
 
@@ -356,22 +358,33 @@ class Scene {
                 continue;
             }
 
+            let isNum = new RegExp('^\\d+$').test(item);
+            if (isNum && item.length % 2 != 0) {
+                item = "0" + item;
+            }
+
             let obj = Scene.encode(item);
             let transcript = obj.transcript;
             try {
                 if (transcript.length % 2 != 0) {
                     transcript += transcript[transcript.length - 1];
                 }
-                let n = parseInt(transcript);
+                let n = transcript;
                 plot.push({
                     key: transcript.replace(/\D/g, ""),
                     script: item,
                     transcript: transcript,
                     hint: obj.hint,
-                    scene: new Scene(n, true)
+                    scene: new Scene(n)
                 });
             } catch (error) {
-                plot.push({key: item, error: error});
+                plot.push({
+                    key: transcript.replace(/\D/g, ""),
+                    script: item,
+                    transcript: transcript,
+                    hint: obj.hint,
+                    error: error
+                });
             }
         }
 
@@ -380,24 +393,24 @@ class Scene {
 }
 
 enum Place {
-    OBJECT = 1, // 1st and 2nd digit from right
-    TEXTURE = 100, // 3rd digit from right
-    CONDITION = 1000, // 4th digit from right
-    ROLE = 10000, // 5th digit from right
-    CHARACTER = 100000, // 6th digit from right
-    ATTIRE = 1000000, // 7th digit from right
-    COLOR = 10000000, // 8th digit from right
-    ASSAULT = 100000000, // 9th digit from right
-    BODY = 1000000000, // 10th digit from right
-    INJURY = 10000000000, // 11th digit from right
-    LOCATION = 100000000000, // 12th digit from right
-    WEATHER = 1000000000000, // 13th digit from right
-    TIME = 10000000000000, // 14th digit from right
-    SOUND = 100000000000000, // 15th digit from right
-    LOCI = 1000000000000000, // 16th & 17th digit from right
-    STATION = 10000000000000000, // 18th digit from right
-    CALAMITY = 100000000000000000, // 19th digit from right
-    PLANET = 1000000000000000000, // 20th digit from right
+    OBJECT = 0, // 1st and 2nd digit from right
+    TEXTURE = 2, // 3rd digit from right
+    CONDITION = 3, // 4th digit from right
+    ROLE = 4, // 5th digit from right
+    CHARACTER = 5, // 6th digit from right
+    ATTIRE = 6, // 7th digit from right
+    COLOR = 7, // 8th digit from right
+    ASSAULT = 8, // 9th digit from right
+    BODY = 9, // 10th digit from right
+    INJURY = 10, // 11th digit from right
+    LOCATION = 11, // 12th digit from right
+    WEATHER = 12, // 13th digit from right
+    TIME = 13, // 14th digit from right
+    SOUND = 14, // 15th digit from right
+    LOCI = 15, // 16th & 17th digit from right
+    STATION = 16, // 18th digit from right
+    CALAMITY = 17, // 19th digit from right
+    PLANET = 18, // 20th digit from right
 }
 
 Scene.init();
