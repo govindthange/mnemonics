@@ -53,7 +53,6 @@ let renderLabels = (txt: any, labelId: string) => {
 
 let processText = (str: string) => {
     let narration = "";
-    let mainTranscript = "";
     let topStoryline = str.split(",");
     let cnt = 1;
     for (let text of topStoryline) {
@@ -62,11 +61,10 @@ let processText = (str: string) => {
         let cnt2 = 1;
         for(let plot of story.plot) {
             if (plot.scene) {
-                mainTranscript += plot.key + " + ";
                 narration += `<span ${ cnt2 > 1 ? 'class="section-item-prefix"' : ''}>A ${plot.scene}`;
                 narration += `<span class='transcript test-controls'>| ${plot.key}</span>`;
                 narration += `<span class='hint' style='display: none;'>| ${plot.hint}</span>`;
-                narration += `<span class='answer'>| ${plot.script}</span>`;
+                narration += `<span class='answer'>| ${plot.script} "${plot.phonic}"</span>`;
                 narration += `<a class="subscript hint" target='_blank' href='https://www.rhymezone.com/r/rhyme.cgi?typeofrhyme=adv&org1=syl&org2=l&org3=y&Word=${plot.script}'>1 </a>`;
                 narration += `<a class="subscript hint" target='_blank' href='https://www.rhymes.net/rhyme/${plot.script}'>2 </a>`;
                 narration += `<a class="subscript hint" target='_blank' href='https://www.rhymer.com/beginning-rhymes/${plot.script}.html'>3 </a>`;
