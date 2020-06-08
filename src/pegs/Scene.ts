@@ -238,10 +238,28 @@ class Scene {
         }
     }
 
-    static encode(str: string): any {
+    static pronounce(str: string): string {
+        str = Scene.replaceRepeatingCharacters(str).toLowerCase();
+        return str.replace(/x/gi, " KS ")
+                    .replace(/sch/gi, " SK ")
+                    .replace(/dg/gi, " J ")
+                    .replace(/[sz]|ce|cy|ci|tio/gi, " S ")
+                    .replace(/[td]/gi, " Th ")
+                    .replace(/[n]/gi, " N ")
+                    .replace(/[m]/gi, " M ")
+                    .replace(/[r]/gi, " R ")
+                    .replace(/[l]/gi, " L ")
+                    .replace(/([j]|ch|ge|gy)/gi, " J ")
+                    .replace(/ck/gi, " K ")
+                    .replace(/[ckgq]/gi, " Kh ")
+                    .replace(/[fvw]/gi, " W ")
+                    .replace(/[pb]/gi, " Ph ");
+    }
 
+    static encode(str: string): any {
         let transcript = str.replace(/igh/gi, "")
                             .replace(/x/gi, "70")
+                            .replace(/sch/gi, "07")
                             .replace(/dg/gi, "6")
                             .replace(/[sz]|ce|cy|ci|tio/gi, "0")
                             .replace(/[td]/gi, "1")
@@ -249,7 +267,8 @@ class Scene {
                             .replace(/[m]/gi, "3")
                             .replace(/[r]/gi, "4")
                             .replace(/[l]/gi, "5")
-                            .replace(/([j]|ch|ge)/gi, "6")
+                            .replace(/([j]|ch|ge|gy)/gi, "6")
+                            .replace(/ck/gi, "7")
                             .replace(/[ckgq]/gi, "7")
                             .replace(/[fvw]/gi, "8")
                             .replace(/[pb]/gi, "9");
@@ -279,11 +298,16 @@ class Scene {
         if (inputLength > 4) {
             output += " alongside "
                 //+ " a" + this.tagText(this.actor.role)
-                + this.tagText(this.actor.character, "", true, true);
+                if (parseInt(this.actor.role.n) == 2) {
+                    output += this.tagText(this.actor.character);
+                }
+                else {
+                    output += this.tagText(this.actor.character, "", true, true);
+                }
         }
 
         if (inputLength > 6) {
-            output += ", in a "
+            output += " in a "
                 + this.tagText(this.actor.attireColor)
                 + this.tagText(this.actor.attire);
         }
@@ -339,6 +363,16 @@ class Scene {
         return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1)
     }
 
+    static replaceRepeatingCharacters(str: string) {
+        let matches = str.match(/([a-zA-Z])\1{1,}/ig);
+        if (matches) {
+            for (let m of matches) {
+                str = str.replace(m, m[0]);
+            }
+        }
+        return str;
+    }
+
     static createStory(text: string) {
         
         let encoding = Scene.encode(text);
@@ -363,6 +397,10 @@ class Scene {
                 item = "0" + item;
             }
 
+            if (!isNum) {
+                item = Scene.replaceRepeatingCharacters(item);
+            }
+
             let obj = Scene.encode(item);
             let transcript = obj.transcript;
             try {
@@ -375,7 +413,8 @@ class Scene {
                     script: item,
                     transcript: transcript,
                     hint: obj.hint,
-                    scene: new Scene(n)
+                    scene: new Scene(n),
+                    phonic: Scene.pronounce(item)
                 });
             } catch (error) {
                 plot.push({

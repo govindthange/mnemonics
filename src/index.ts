@@ -6,44 +6,38 @@ import { Scene } from "./pegs/Scene";
 
 //new DefaultPanel();
 
-$("#showButton").hide();
+let toggleControl = (cls: string, flag: boolean) => {
+    $(cls).toggle(flag);
+};
 
-$('#hideButton').click({}, event => {
-    $(".test-controls").hide();
-    $("#showButton").show();
+let inputChecked: boolean = true;
+$('#inputCheck').change((e: any) => {
+    inputChecked = e.currentTarget.checked;
+    toggleControl(".test-controls", e.currentTarget.checked);
 });
 
-$('#showButton').click({}, event => {
-    $(".test-controls").show();
-    $("#showButton").hide();
+let transChecked: boolean = true;
+$('#transCheck').change((e: any) => {
+    transChecked = e.currentTarget.checked;
+    toggleControl(".transcript", e.currentTarget.checked);
 });
 
-$("#hideHintButton").hide();
-
-$('#showHintButton').click({}, event => {
-    $(".hint").show();
-    $("#hideHintButton").show();
-    $("#showHintButton").hide();
+let hintChecked: boolean = false;
+$('#hintCheck').change((e: any) => {
+    hintChecked = e.currentTarget.checked;
+    toggleControl(".hint", e.currentTarget.checked);
 });
 
-$('#hideHintButton').click({}, event => {
-    $(".hint").hide();
-    $("#hideHintButton").hide();
-    $("#showHintButton").show();
+let ansChecked: boolean =  true;
+$('#ansCheck').change((e: any) => {
+    ansChecked = e.currentTarget.checked;
+    toggleControl(".answer", e.currentTarget.checked);
 });
 
-$("#showAnsButton").hide();
-
-$('#showAnsButton').click({}, event => {
-    $(".answer").show();
-    $("#hideAnsButton").show();
-    $("#showAnsButton").hide();
-});
-
-$('#hideAnsButton').click({}, event => {
-    $(".answer").hide();
-    $("#hideAnsButton").hide();
-    $("#showAnsButton").show();
+let helpLinkChecked: boolean = false;
+$('#helpCheck').change((e: any) => {
+    helpLinkChecked = e.currentTarget.checked;
+    toggleControl(".help", e.currentTarget.checked);
 });
 
 let renderLabels = (txt: any, labelId: string) => {
@@ -53,7 +47,6 @@ let renderLabels = (txt: any, labelId: string) => {
 
 let processText = (str: string) => {
     let narration = "";
-    let mainTranscript = "";
     let topStoryline = str.split(",");
     let cnt = 1;
     for (let text of topStoryline) {
@@ -62,14 +55,13 @@ let processText = (str: string) => {
         let cnt2 = 1;
         for(let plot of story.plot) {
             if (plot.scene) {
-                mainTranscript += plot.key + " + ";
                 narration += `<span ${ cnt2 > 1 ? 'class="section-item-prefix"' : ''}>A ${plot.scene}`;
                 narration += `<span class='transcript test-controls'>| ${plot.key}</span>`;
                 narration += `<span class='hint' style='display: none;'>| ${plot.hint}</span>`;
-                narration += `<span class='answer'>| ${plot.script}</span>`;
-                narration += `<a class="subscript hint" target='_blank' href='https://www.rhymezone.com/r/rhyme.cgi?typeofrhyme=adv&org1=syl&org2=l&org3=y&Word=${plot.script}'>1 </a>`;
-                narration += `<a class="subscript hint" target='_blank' href='https://www.rhymes.net/rhyme/${plot.script}'>2 </a>`;
-                narration += `<a class="subscript hint" target='_blank' href='https://www.rhymer.com/beginning-rhymes/${plot.script}.html'>3 </a>`;
+                narration += `<span class='answer'>| ${plot.script} "${plot.phonic}"</span>`;
+                narration += `<a class="subscript help" target='_blank' href='https://www.rhymezone.com/r/rhyme.cgi?typeofrhyme=adv&org1=syl&org2=l&org3=y&Word=${plot.script}'>1 </a>`;
+                narration += `<a class="subscript help" target='_blank' href='https://www.rhymes.net/rhyme/${plot.script}'>2 </a>`;
+                narration += `<a class="subscript help" target='_blank' href='https://www.rhymer.com/beginning-rhymes/${plot.script}.html'>3 </a>`;
                 narration += "</span>";
             }
             else {
@@ -87,6 +79,12 @@ let processText = (str: string) => {
 
     renderLabels(Scene.encode(str).transcript, "transcript");
     renderLabels(narration, "narration");
+
+    toggleControl(".test-controls", inputChecked);
+    toggleControl(".transcripts", transChecked);
+    toggleControl(".hint", hintChecked);
+    toggleControl(".answer", ansChecked);
+    toggleControl(".help", helpLinkChecked);
 }
 
 const textInput = document.querySelector('#textInput');

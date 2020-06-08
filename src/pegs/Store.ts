@@ -12,7 +12,7 @@ class Store {
     actors: string[][] = [
         ["SUPERMAN", "THOR", "ANTMAN", "captain MARVEL", "IRONMAN", "HULK", "JAMES bond", "CAPTAIN america", "WONDERWOMAN", "BATMAN"],
         ["CYRUS Poonawalla", "UDAY Kotak", "NARAYAN Murthi", "MUKESH Ambani", "RATAN Tata", "LARRY Ellison", "JEFF Bezos", "KUMAR Birla", "WARREN Buffett", "BILL Gates"],
-        ["a ringmaster with ZEBRA", "a ringmaster with DEER", "a ringmaster with NEWT", "a ringmaster with MONKEY", "a ringmaster with RHINO", "a ringmaster with LION", "a ringmaster with GIRAFFE", "a ringmaster with KANGAROO", "a ringmaster with FOX", "a ringmaster with BEAR"],
+        ["an ANIMAL-ringmaster calling ZEBRA", "an ANIMAL-ringmaster calling DEER", "an ANIMAL-ringmaster calling NEWT", "an ANIMAL-ringmaster calling MONKEY", "an ANIMAL-ringmaster calling RHINO", "an ANIMAL-ringmaster calling LION", "an ANIMAL-ringmaster calling GIRAFFE", "an ANIMAL-ringmaster calling KANGAROO", "an ANIMAL-ringmaster calling FOX", "an ANIMAL-ringmaster calling BEAR"],
         ["SS", "DHARMENDRA", "NANA Patekar", "MADHURI Dixit", "RANVEER Kapoor", "L", "JOHN Abrhim", "KARTRINA Kaif", "VIVEK Oberoi", "BAMAN Irani"],
         ["SHAKIRA", "TAYLOR Swift", "NICOLE Scherzinger", "MICHAEL Jackson", "ARIANA Grande", "LADY Gaga", "JENIFER Lopez", "KATY Perry", "WHITNEY Houston", "BEYONCE"],
         ["SALMAN Khan", "DEVANAND", "N", "AMITABH Bachhan", "RAJ Kapoor", "LATA Mangeshkar", "CHIMPU (Rishikapoor)", "K", "V", "P"],
