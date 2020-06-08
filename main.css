@@ -2,6 +2,16 @@ body {
     margin: 10px;
 }
 
+input[type="checkbox"] {
+    margin-left: 5px;
+    margin-right: 3px;
+}
+
+a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 img {
     display: none
 }
@@ -44,12 +54,14 @@ b {
 }
 
 .superscript {
+    font-family: 'Courier New', Courier, monospace;
     vertical-align: super;
     color: gray;
     font-size: xx-small;
 }
 
 .subscript {
+    font-family: 'Courier New', Courier, monospace;
     vertical-align: sub;
     color: blue;
     font-size: xx-small;
