@@ -245,7 +245,7 @@ class Scene {
                     .replace(/dg/gi, " J ")
                     .replace(/[sz]|ce|cy|ci|tio/gi, " S ")
                     .replace(/[td]/gi, " Th ")
-                    .replace(/[n]/gi, " N ")
+                    .replace(/[n]|kn/gi, " N ")
                     .replace(/[m]/gi, " M ")
                     .replace(/[r]/gi, " R ")
                     .replace(/[l]/gi, " L ")
@@ -253,7 +253,8 @@ class Scene {
                     .replace(/ck/gi, " K ")
                     .replace(/[ckgq]/gi, " Kh ")
                     .replace(/[fvw]/gi, " W ")
-                    .replace(/[pb]/gi, " Ph ");
+                    .replace(/[pb]/gi, " Ph ")
+                    .trim();
     }
 
     static encode(str: string): any {
@@ -263,7 +264,7 @@ class Scene {
                             .replace(/dg/gi, "6")
                             .replace(/[sz]|ce|cy|ci|tio/gi, "0")
                             .replace(/[td]/gi, "1")
-                            .replace(/[n]/gi, "2")
+                            .replace(/[n]|kn/gi, "2")
                             .replace(/[m]/gi, "3")
                             .replace(/[r]/gi, "4")
                             .replace(/[l]/gi, "5")
@@ -279,6 +280,30 @@ class Scene {
         }
         transcript = transcript.replace(/[aeiouyh]/gi, "");
         return { script: str, transcript: transcript, hint: hint};
+    }
+
+    public getPlot(): string {
+        let inputLength: number = this.n.toString().length;
+
+        let output: string = this.tagText(this.prop.object);
+
+        if (inputLength > 4) {
+            output += " alongside "
+                //+ " a" + this.tagText(this.actor.role)
+                if (parseInt(this.actor.role.n) == 2) {
+                    output += this.tagText(this.actor.character);
+                }
+                else {
+                    output += this.tagText(this.actor.character, "", true, true);
+                }
+        }
+
+        if (inputLength > 11) {
+            output += ", who escapes and hides "
+                     + this.tagText(this.site.location)
+        }
+
+        return output + ".";
     }
 
     public toString(): string {
@@ -364,6 +389,7 @@ class Scene {
     }
 
     static replaceRepeatingCharacters(str: string) {
+        str = str.replace(/cc|gg/gi, "k");
         let matches = str.match(/([a-zA-Z])\1{1,}/ig);
         if (matches) {
             for (let m of matches) {
@@ -391,7 +417,7 @@ class Scene {
             if (item.length == 0) {
                 continue;
             }
-
+            let text = item;
             let isNum = new RegExp('^\\d+$').test(item);
             if (isNum && item.length % 2 != 0) {
                 item = "0" + item;
@@ -410,6 +436,7 @@ class Scene {
                 let n = transcript;
                 plot.push({
                     key: transcript.replace(/\D/g, ""),
+                    text: text,
                     script: item,
                     transcript: transcript,
                     hint: obj.hint,
