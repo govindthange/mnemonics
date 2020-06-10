@@ -7,6 +7,16 @@ input[type="checkbox"] {
     margin-right: 3px;
 }
 
+input:focus {
+    border: 1px solid blue;
+}
+
+input[type="text"] {
+    width: 125px;
+    margin-right: 5px;
+    border: 1px solid lightgray;
+}
+
 a {
     margin-left: 5px;
     margin-right: 5px;
@@ -19,6 +29,7 @@ img {
 textarea {
     width: 100%;
     height: 40%;
+    border-color: lightgray;
 }
 
 .section {
@@ -73,15 +84,27 @@ b {
     margin-right: 10px;
 }
 
+div.transcript {
+    margin: 10px;
+    font-weight: bold;
+    color: black;
+}
+
 .hint {
     font-family: 'Courier New', Courier, monospace;
-    color: lightgray;
+    color: gray;
     margin-right: 10px;
 }
 
 .answer {
     font-family: 'Courier New', Courier, monospace;
-    color: lightgray;
+    color: gray;
+    margin-right: 10px;
+}
+
+.phonics {
+    font-family: 'Courier New', Courier, monospace;
+    color: gray;
     margin-right: 10px;
 }
 
